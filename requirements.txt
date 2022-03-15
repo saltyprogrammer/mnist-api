@@ -1,0 +1,4 @@
+fastapi[all]
+pillow
+numpy
+tflite-runtime

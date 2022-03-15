@@ -1,0 +1,9 @@
+name: mnist-api
+dependencies:
+  - python=3.9
+  - pip
+  - pip:
+    - fastapi[all]
+    - pillow
+    - numpy
+    - tflite-runtime
