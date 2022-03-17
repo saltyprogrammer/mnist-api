@@ -1,0 +1,1 @@
+curl -k -X POST -F 'file=@1.png'  192.168.3.11:8080/predictor/classify

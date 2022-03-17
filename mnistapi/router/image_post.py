@@ -24,10 +24,12 @@ def preprocess_image(image: Image):
 
 def predict(signature: SignatureRunner, batch: np.ndarray):
     predictions = signature(input_2=batch)["dense_1"][0]
-    return int(predictions.argmax())
+    print(predictions)
+    prediction = predictions.argmax()
+    return int(prediction), float(predictions[prediction])
 
 @router.post("/classify")
 async def classify_image(file: UploadFile=File(...), signature: SignatureRunner=Depends(get_tflite_model)):
     batch = preprocess_image(Image.open(BytesIO(await file.read())))
-    print(batch.shape)
-    return {"category": predict(signature, batch)}
+    category, probability = predict(signature, batch)
+    return {"category": category, "probability": probability}
